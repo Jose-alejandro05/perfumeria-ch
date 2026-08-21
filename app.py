@@ -33,11 +33,9 @@ ADMIN_PASSWORD_HASH = generate_password_hash(os.environ.get('ADMIN_PASSWORD', 'c
 # Cámbialos por los datos reales de tu cuenta bancaria/Nequi/Daviplata.
 # ---------------------------------------------------------
 CUENTA_BANCO = {
-    'banco': 'Bancolombia',
-    'tipo_cuenta': 'Ahorros',
-    'numero_cuenta': '000-000000-00',
-    'titular': 'PERFUMERIA CH',
-    'documento': 'C.C. 000000000',
+    'banco': 'Nequi',
+    'numero_cuenta': ' 3006115265',
+    'titular': 'Camilo Heredia',
 }
 
 # ---------------------------------------------------------
