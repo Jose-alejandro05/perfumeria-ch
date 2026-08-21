@@ -11,7 +11,7 @@
             {% if correo_enviado %}
                 Te enviamos la confirmación a {{ pedido.cliente_email }}
             {% else %}
-                Guardamos tu pedido correctamente. (El envío automático de correo aún no está configurado.)
+                Guardamos tu pedido correctamente.
             {% endif %}
         </p>
         <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Seguir comprando</a>
