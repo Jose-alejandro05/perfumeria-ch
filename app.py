@@ -34,7 +34,7 @@ ADMIN_PASSWORD_HASH = generate_password_hash(os.environ.get('ADMIN_PASSWORD', 'c
 # ---------------------------------------------------------
 CUENTA_BANCO = {
     'banco': 'Nequi',
-    'numero_cuenta': ' 3006115265',
+    'numero_cuenta': '3006115265',
     'titular': 'Camilo Heredia',
 }
 
