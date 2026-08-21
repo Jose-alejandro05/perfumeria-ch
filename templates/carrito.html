@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block titulo %}Carrito — PERFUMERIA CH{% endblock %}
+
+{% block contenido %}
+<h2>Tu carrito</h2>
+
+{% if items %}
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="{{ item.producto.imagen_url }}" width="50" height="50" style="object-fit:cover" class="rounded">
+                    {{ item.producto.nombre }}
+                </div>
+            </td>
+            <td>{{ item.producto.precio_texto or '${:,.0f}'.format(item.producto.precio) }}</td>
+            <td style="width:140px">
+                <form method="post" action="{{ url_for('actualizar_carrito', producto_id=item.producto.id) }}" class="d-flex gap-1">
+                    <input type="number" name="cantidad" value="{{ item.cantidad }}" min="0" max="{{ item.producto.stock }}" class="form-control form-control-sm">
+                    <button class="btn btn-sm btn-outline-secondary">↻</button>
+                </form>
+            </td>
+            <td>${{ '{:,.0f}'.format(item.subtotal) }}</td>
+            <td><a href="{{ url_for('eliminar_carrito', producto_id=item.producto.id) }}" class="btn btn-sm btn-outline-danger">Quitar</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-end">
+    <h4>Total: ${{ '{:,.0f}'.format(total) }}</h4>
+    <a href="{{ url_for('checkout') }}" class="btn btn-success btn-lg mt-2">Finalizar compra</a>
+</div>
+
+{% else %}
+<p class="text-muted">Tu carrito está vacío.</p>
+<a href="{{ url_for('index') }}" class="btn btn-primary">Ir al catálogo</a>
+{% endif %}
+
+{% endblock %}

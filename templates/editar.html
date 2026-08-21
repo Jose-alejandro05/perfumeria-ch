@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block titulo %}Editar producto — PERFUMERIA CH{% endblock %}
+
+{% block contenido %}
+<h2>Editar colonia</h2>
+
+<form method="post" class="row g-3 mb-5" enctype="multipart/form-data">
+    <div class="col-md-4">
+        <label class="form-label">Nombre</label>
+        <input type="text" name="nombre" class="form-control" value="{{ p.nombre }}" required>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Marca</label>
+        <input type="text" name="marca" class="form-control" value="{{ p.marca }}" required>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Género</label>
+        <select name="genero" class="form-select">
+            <option {% if p.genero == 'Hombre' %}selected{% endif %}>Hombre</option>
+            <option {% if p.genero == 'Mujer' %}selected{% endif %}>Mujer</option>
+            <option {% if p.genero == 'Unisex' %}selected{% endif %}>Unisex</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Descripción</label>
+        <textarea name="descripcion" class="form-control">{{ p.descripcion or '' }}</textarea>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Precio (COP)</label>
+        <input type="text" inputmode="decimal" name="precio" class="form-control" value="{{ p.precio_texto or p.precio }}" required>
+        <div class="form-text">Escríbelo como quieras que se vea.</div>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Stock</label>
+        <input type="number" name="stock" class="form-control" value="{{ p.stock }}" required>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Mililitros</label>
+        <input type="number" name="ml" class="form-control" value="{{ p.ml }}">
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Imagen actual</label><br>
+        <img src="{{ p.imagen_url }}" width="60" height="60" style="object-fit:cover" class="rounded mb-2"><br>
+        <input type="file" name="imagen" class="form-control" accept=".png,.jpg,.jpeg,.webp,.gif">
+        <div class="form-text">Déjalo vacío para conservar la imagen actual.</div>
+    </div>
+    <div class="col-12 d-flex gap-2">
+        <button class="btn btn-primary">Guardar cambios</button>
+        <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

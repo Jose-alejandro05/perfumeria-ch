@@ -1,0 +1,175 @@
+/* ============================================================
+   PERFUMERIA CH — identidad visual
+   Paleta: marfil cálido + negro carbón + dorado + burdeos
+   Tipografía: Cormorant Garamond (display) + Poppins (cuerpo)
+   ============================================================ */
+
+:root {
+    --ch-marfil: #FAF6F0;
+    --ch-carbon: #191510;
+    --ch-dorado: #B08D57;
+    --ch-dorado-claro: #D9C79E;
+    --ch-burdeos: #6E2B2B;
+    --ch-taupe: #8A7F73;
+    --ch-borde: #E6DED2;
+}
+
+body {
+    background-color: var(--ch-marfil);
+    font-family: 'Poppins', sans-serif;
+    color: var(--ch-carbon);
+}
+
+h1, h2, h3, h4, .navbar-brand, .display-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar.bg-dark {
+    background-color: var(--ch-carbon) !important;
+    border-bottom: 1px solid rgba(176, 141, 87, 0.35);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.logo-ch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ch-dorado-claro), var(--ch-dorado));
+    color: var(--ch-carbon);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.btn-outline-light {
+    border-color: var(--ch-dorado);
+    color: var(--ch-dorado-claro);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--ch-dorado);
+    border-color: var(--ch-dorado);
+    color: var(--ch-carbon);
+}
+
+/* ---------- Hero (catálogo) ---------- */
+.ch-hero {
+    background: linear-gradient(160deg, var(--ch-carbon) 0%, #2b2318 100%);
+    color: var(--ch-marfil);
+    padding: 4.5rem 1rem 3.5rem;
+    text-align: center;
+    margin: -1.5rem -12px 2.5rem;
+}
+
+.ch-hero h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.ch-hero p {
+    color: var(--ch-dorado-claro);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.ch-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1.5rem auto 0;
+    color: var(--ch-dorado);
+}
+
+.ch-divider::before,
+.ch-divider::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: var(--ch-dorado);
+    opacity: 0.6;
+}
+
+/* ---------- Cards de producto ---------- */
+.card {
+    border: 1px solid var(--ch-borde);
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(25, 21, 16, 0.12);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    background-color: #f1ece3;
+}
+
+.card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background-color: var(--ch-carbon);
+    border-color: var(--ch-carbon);
+}
+
+.btn-primary:hover {
+    background-color: var(--ch-burdeos);
+    border-color: var(--ch-burdeos);
+}
+
+.btn-success {
+    background-color: var(--ch-dorado);
+    border-color: var(--ch-dorado);
+    color: var(--ch-carbon);
+    font-weight: 600;
+}
+
+.btn-success:hover {
+    background-color: var(--ch-dorado-claro);
+    border-color: var(--ch-dorado-claro);
+    color: var(--ch-carbon);
+}
+
+/* ---------- Pago por transferencia ---------- */
+.ch-pago-transferencia {
+    background: #fff;
+    border: 1px dashed var(--ch-dorado);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
+}
+
+.ch-pago-transferencia dt {
+    color: var(--ch-taupe);
+    font-size: 0.85rem;
+}
+
+.ch-pago-transferencia dd {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+footer small {
+    color: var(--ch-taupe);
+}

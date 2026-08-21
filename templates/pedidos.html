@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block titulo %}Pedidos — PERFUMERIA CH{% endblock %}
+
+{% block contenido %}
+<h2>Historial de pedidos</h2>
+
+{% if pedidos %}
+<div class="table-responsive">
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+            <th>Productos</th>
+            <th>Total</th>
+            <th>Pago</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in pedidos %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.fecha.strftime('%d/%m/%Y %H:%M') }}</td>
+            <td>{{ p.cliente_nombre }}</td>
+            <td>{{ p.cliente_email }}</td>
+            <td>{{ p.cliente_direccion }}</td>
+            <td>{{ p.detalle }}</td>
+            <td>${{ '{:,.0f}'.format(p.total) }}</td>
+            <td>
+                {{ p.metodo_pago }}
+                {% if p.referencia_pago %}<br><small class="text-muted">Ref: {{ p.referencia_pago }}</small>{% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<p class="text-muted">Todavía no hay pedidos registrados.</p>
+{% endif %}
+{% endblock %}

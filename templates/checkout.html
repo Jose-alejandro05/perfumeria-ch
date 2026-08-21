@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block titulo %}Checkout — PERFUMERIA CH{% endblock %}
+
+{% block contenido %}
+
+{% if exito %}
+    <div class="text-center py-5">
+        <h2 class="text-success">¡Gracias por tu compra, {{ pedido.cliente_nombre }}! 🎉</h2>
+        <p>Tu pedido #{{ pedido.id }} por <strong>${{ '{:,.0f}'.format(pedido.total) }}</strong> fue registrado.</p>
+        <p class="text-muted">
+            {% if correo_enviado %}
+                Te enviamos la confirmación a {{ pedido.cliente_email }}
+            {% else %}
+                Guardamos tu pedido correctamente. (El envío automático de correo aún no está configurado.)
+            {% endif %}
+        </p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Seguir comprando</a>
+    </div>
+{% else %}
+    <h2>Finalizar compra</h2>
+    <div class="row">
+        <div class="col-md-7">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Nombre completo</label>
+                    <input type="text" name="nombre" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dirección de envío</label>
+                    <textarea name="direccion" class="form-control" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label d-block">Método de pago</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metodo_pago" id="pago-transferencia" value="Transferencia" checked onclick="mostrarTransferencia(true)">
+                        <label class="form-check-label" for="pago-transferencia">Transferencia bancaria</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metodo_pago" id="pago-contraentrega" value="Contraentrega" onclick="mostrarTransferencia(false)">
+                        <label class="form-check-label" for="pago-contraentrega">Pago contraentrega</label>
+                    </div>
+                </div>
+
+                <div id="bloque-transferencia" class="ch-pago-transferencia mb-3">
+                    <p class="mb-2">Realiza la transferencia a esta cuenta y escribe el número de comprobante:</p>
+                    <dl class="row mb-2">
+                        <dt class="col-5">Banco</dt><dd class="col-7">{{ cuenta.banco }}</dd>
+                        <dt class="col-5">Tipo de cuenta</dt><dd class="col-7">{{ cuenta.tipo_cuenta }}</dd>
+                        <dt class="col-5">Número</dt><dd class="col-7">{{ cuenta.numero_cuenta }}</dd>
+                        <dt class="col-5">Titular</dt><dd class="col-7">{{ cuenta.titular }}</dd>
+                        <dt class="col-5">Documento</dt><dd class="col-7">{{ cuenta.documento }}</dd>
+                    </dl>
+                    <input type="text" name="referencia_pago" class="form-control" placeholder="Número de comprobante (opcional)">
+                </div>
+
+                <button class="btn btn-success btn-lg">Confirmar pedido</button>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <h5>Resumen</h5>
+            <ul class="list-group mb-3">
+                {% for item in items %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ item.cantidad }}x {{ item.producto.nombre }}</span>
+                    <span>${{ '{:,.0f}'.format(item.subtotal) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <h5 class="text-end">Total: ${{ '{:,.0f}'.format(total) }}</h5>
+        </div>
+    </div>
+
+    <script>
+        function mostrarTransferencia(mostrar) {
+            document.getElementById('bloque-transferencia').style.display = mostrar ? 'block' : 'none';
+        }
+    </script>
+{% endif %}
+
+{% endblock %}
